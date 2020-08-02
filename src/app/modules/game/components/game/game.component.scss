@@ -1,0 +1,23 @@
+.grid-container {
+  background-color: #bbada0;
+  padding: 10px;
+  display: inline-block;
+}
+.grid-row {
+  margin-bottom: 10px;
+
+}
+.grid-row:last-of-type {
+  margin: 0;
+}
+.grid-cell {
+  width: 100px;
+  height: 100px;
+  margin-right:10px;
+  background-color: rgba(238, 228, 218, 0.35);
+  display: inline-block;
+}
+.grid-cell:last-of-type {
+  margin: 0;
+
+}
