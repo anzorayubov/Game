@@ -2,9 +2,10 @@
   background-color: #bbada0;
   padding: 10px;
   display: inline-block;
+  position: relative;
 }
 .grid-row {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 
 }
 .grid-row:last-of-type {
@@ -20,4 +21,20 @@
 .grid-cell:last-of-type {
   margin: 0;
 
+}
+.item {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 10px;
+  left: 10px;
+  background-color: brown;
+}
+.item-title {
+  position: absolute;
+  font-size: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
 }
