@@ -7,6 +7,22 @@ import {Item} from '../../models/item';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
+
+  colorMap: {[k: number]: string} = {
+    2: 'brown',
+    4: 'brown',
+    8: 'brown',
+    16: 'brown',
+    32: 'brown',
+    64: 'brown',
+    128: 'brown',
+    256: 'brown',
+    512: 'brown',
+    1024: 'brown',
+    2048: 'brown',
+  };
+
+
   items: Item[] = [
     {
       value: 2,
