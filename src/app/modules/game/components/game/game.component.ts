@@ -8,18 +8,18 @@ import {Item} from '../../models/item';
 })
 export class GameComponent implements OnInit {
 
-  colorMap: {[k: number]: string} = {
-    2: 'brown',
-    4: 'brown',
-    8: 'brown',
-    16: 'brown',
-    32: 'brown',
-    64: 'brown',
-    128: 'brown',
-    256: 'brown',
-    512: 'brown',
-    1024: 'brown',
-    2048: 'brown',
+  colorMap: { [k: number]: string } = {
+    2: '#626567',
+    4: '#424949',
+    8: '#7E5109',
+    16: '#196F3D',
+    32: '#138D75',
+    64: '#154360',
+    128: '#9B59B6',
+    256: '#78281F',
+    512: '#C0392B',
+    1024: '#7D6608',
+    2048: '#45B39D',
   };
 
 
@@ -94,7 +94,7 @@ export class GameComponent implements OnInit {
     return {
       top,
       left,
-      'background-color': 'brown'
+      'background-color': this.colorMap[item.value] || 'black'
     };
   }
 }
