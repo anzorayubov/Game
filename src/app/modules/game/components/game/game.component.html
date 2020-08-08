@@ -26,14 +26,8 @@
     </div>
 
     <div class="items">
-      <div class="item" *ngFor="let item of items" [ngStyle]="getStyles(item)">
+      <div class="item" *ngFor="let item of gameService.items" [ngStyle]="getStyles(item)">
         <div class="item-title">{{item.value}}</div>
-      </div>
-      <div class="item" [ngStyle]="{top:'120px', left: '10px', 'background-color': 'blue'}">
-        <div class="item-title">4</div>
-      </div>
-      <div class="item" [ngStyle]="{top:'10px', left: '120px', 'background-color': 'navy'}">
-        <div class="item-title">8</div>
       </div>
     </div>
 
