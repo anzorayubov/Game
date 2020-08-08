@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Item} from '../../models/item';
 
 @Component({
@@ -7,6 +7,13 @@ import {Item} from '../../models/item';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
+
+  keyEventCodeMap = {
+    ArrowRight: 'ArrowRight',
+    ArrowLeft: 'ArrowLeft',
+    ArrowUp: 'ArrowUp',
+    ArrowDown: 'ArrowDown'
+  }
 
   colorMap: { [k: number]: string } = {
     2: '#626567',
@@ -96,5 +103,15 @@ export class GameComponent implements OnInit {
       left,
       'background-color': this.colorMap[item.value] || 'black'
     };
+  }
+
+  @HostListener('window:keyup', ['$event'])
+
+  onKeyUp(event: KeyboardEvent) {
+
+    if (this.keyEventCodeMap[event.code]) {
+      console.log(this.keyEventCodeMap[event.code])
+    }
+
   }
 }
