@@ -51,6 +51,8 @@ export class GameComponent implements OnInit {
 
   onKeyUp(event: KeyboardEvent) {
 
+    // остановился на 42:28
+    
     if (this.keyEventCodeMap[event.code]) {
       this.gameService[this.keyEventCodeMap[event.code]]()
 
