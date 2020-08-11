@@ -84,19 +84,72 @@ export class GameService {
   }
 
   left() {
-    this.generateItem()
+    this.move()
   }
 
   up() {
-    this.generateItem()
+    this.move()
   }
 
   right() {
-    this.generateItem()
+    this.move()
   }
 
   down() {
+    this.move()
+  }
+
+  private move() {
+    this.clearDeletedItems()
+
+    // left
+    const mergedItems: Item[] = [];
+
+    for (let row = 1; row <= this.size; row++) {
+      const rowItems = this.items
+        .filter(item => item.row === row)
+        .sort((a, b) => a.col - b.col)
+
+      let col = 1
+      let merged = false
+      let prevItem = null
+
+      for (let i = 0; i < rowItems.length; i++) {
+        const item = rowItems[i]
+        if (prevItem) {
+          if (merged) {
+            merged = false
+          } else if (item.value === prevItem.value) {
+            col--
+            prevItem.isOnDelete = true
+            item.isOnDelete = true
+            mergedItems.push(({
+              value: item.value * 2,
+              col,
+              row
+            }))
+
+            merged = true
+          }
+
+        }
+
+        item.col = col
+        col++
+        prevItem = item
+
+      }
+
+    }
+
+    this.items = [...this.items, ...mergedItems];
+
+
     this.generateItem()
+  }
+
+  private clearDeletedItems() {
+    this.items = this.items.filter(item => !item.isOnDelete)
   }
 
   private generateItem(length = 2) {
