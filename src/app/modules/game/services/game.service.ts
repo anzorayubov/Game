@@ -92,14 +92,14 @@ export class GameService {
   }
 
   right() {
-    this.move()
+    this.move(true)
   }
 
   down() {
     this.move()
   }
 
-  private move() {
+  private move(reverse = false) {
     this.clearDeletedItems()
 
     // left
@@ -110,7 +110,11 @@ export class GameService {
         .filter(item => item.row === row)
         .sort((a, b) => a.col - b.col)
 
-      let col = 1
+      if (reverse) {
+        rowItems.reverse()
+      }
+
+      let col = reverse ? this.size : 1
       let merged = false
       let prevItem = null
 
@@ -120,7 +124,7 @@ export class GameService {
           if (merged) {
             merged = false
           } else if (item.value === prevItem.value) {
-            col--
+            reverse ? col++ : col--
             prevItem.isOnDelete = true
             item.isOnDelete = true
             mergedItems.push(({
@@ -135,7 +139,7 @@ export class GameService {
         }
 
         item.col = col
-        col++
+        reverse ? col-- : col++
         prevItem = item
 
       }
