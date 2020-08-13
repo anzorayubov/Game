@@ -19,63 +19,7 @@ export class GameService {
     return this.items.map(item => item.row * 10 + item.col);
   }
 
-  items: Item[] = [
-    // {
-    //   value: 2,
-    //   col: 1,
-    //   row: 1
-    // },
-    // {
-    //   value: 4,
-    //   col: 3,
-    //   row: 1
-    // },
-    // {
-    //   value: 8,
-    //   col: 1,
-    //   row: 3
-    // },
-    // {
-    //   value: 16,
-    //   col: 2,
-    //   row: 2
-    // },
-    // {
-    //   value: 32,
-    //   col: 1,
-    //   row: 1
-    // },
-    // {
-    //   value: 64,
-    //   col: 4,
-    //   row: 1
-    // },
-    // {
-    //   value: 128,
-    //   col: 4,
-    //   row: 2
-    // },
-    // {
-    //   value: 256,
-    //   col: 4,
-    //   row: 3
-    // },
-    // {
-    //   value: 512,
-    //   col: 4,
-    //   row: 4
-    // },
-    // {
-    //   value: 1024,
-    //   col: 2,
-    //   row: 1
-    // },
-    // {
-    //   value: 2048,
-    //   col: 2,
-    //   row: 4
-    // }
-  ];
+  items: Item[] = [];
 
   constructor() {
 
@@ -84,37 +28,37 @@ export class GameService {
   }
 
   left() {
-    this.move()
+    this.move('row', 'col', false)
   }
 
   up() {
-    this.move()
+    this.move('col', 'row', false)
   }
 
   right() {
-    this.move(true)
+    this.move('row', 'col', true)
   }
 
   down() {
-    this.move()
+    this.move('col', 'row', true)
   }
 
-  private move(reverse = false) {
+  private move(dimX: 'col' | 'row' = 'row', dimY: 'col' | 'row' = 'col', reverse = false) {
     this.clearDeletedItems()
 
     // left
     const mergedItems: Item[] = [];
 
-    for (let row = 1; row <= this.size; row++) {
+    for (let x = 1; x <= this.size; x++) {
       const rowItems = this.items
-        .filter(item => item.row === row)
-        .sort((a, b) => a.col - b.col)
+        .filter(item => item[dimX] === x)
+        .sort((a, b) => a[dimY] - b[dimY])
 
       if (reverse) {
         rowItems.reverse()
       }
 
-      let col = reverse ? this.size : 1
+      let y = reverse ? this.size : 1
       let merged = false
       let prevItem = null
 
@@ -124,22 +68,22 @@ export class GameService {
           if (merged) {
             merged = false
           } else if (item.value === prevItem.value) {
-            reverse ? col++ : col--
+            reverse ? y++ : y--
             prevItem.isOnDelete = true
             item.isOnDelete = true
             mergedItems.push(({
               value: item.value * 2,
-              col,
-              row
-            }))
+              [dimY]: y,
+              [dimX]: x
+            } as any))
 
             merged = true
           }
 
         }
 
-        item.col = col
-        reverse ? col-- : col++
+        item[dimY] = y
+        reverse ? y-- : y++
         prevItem = item
 
       }
