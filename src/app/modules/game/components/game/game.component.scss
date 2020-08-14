@@ -4,24 +4,29 @@
   display: inline-block;
   position: relative;
 }
+
 .grid-row {
   margin-bottom: 6px;
 
 }
+
 .grid-row:last-of-type {
   margin: 0;
 }
+
 .grid-cell {
   width: 100px;
   height: 100px;
-  margin-right:10px;
+  margin-right: 10px;
   background-color: rgba(238, 228, 218, 0.35);
   display: inline-block;
 }
+
 .grid-cell:last-of-type {
   margin: 0;
 
 }
+
 .item {
   position: absolute;
   width: 100px;
@@ -30,6 +35,7 @@
   left: 10px;
   background-color: brown;
 }
+
 .item-title {
   position: absolute;
   font-size: 40px;
@@ -37,4 +43,21 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fff;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.overlay-text {
+  font-size: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

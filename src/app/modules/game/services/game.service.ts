@@ -19,6 +19,8 @@ export class GameService {
     return this.items.map(item => item.row * 10 + item.col);
   }
 
+  theEnd = false;
+
   items: Item[] = [];
 
   constructor() {
@@ -44,9 +46,13 @@ export class GameService {
   }
 
   private move(dimX: 'col' | 'row' = 'row', dimY: 'col' | 'row' = 'col', reverse = false) {
+
+    if (!this.canIMove(dimX)){
+      return
+    }
     this.clearDeletedItems()
 
-    // left
+
     const mergedItems: Item[] = [];
 
     for (let x = 1; x <= this.size; x++) {
@@ -94,6 +100,8 @@ export class GameService {
 
 
     this.generateItem()
+
+    this.theEnd = this.thisIsTheEnd()
   }
 
   private clearDeletedItems() {
@@ -114,6 +122,31 @@ export class GameService {
       }))
     ];
 
+  }
+
+  private thisIsTheEnd() {
+
+    return !this.canIMove('row') && !this.canIMove('col');
+  }
+
+  private canIMove(dir: 'row' | 'col') {
+    for (let x = 1; x <= this.size; x++) {
+      const items = this.items.filter(item => !item.isOnDelete && item[dir] === x);
+
+      if (items.length !== this.size) {
+        return true;
+      }
+
+      let prevValue = 0;
+
+      for (const item of items) {
+        if (item.value === prevValue) {
+          return true;
+        }
+        prevValue = item.value;
+      }
+    }
+    return false;
   }
 
   private generateAvailableCells() {
