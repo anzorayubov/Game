@@ -20,6 +20,7 @@ export class GameService {
     return this.items.map(item => item.row * 10 + item.col);
   }
 
+  scores = 0;
   theEnd = false;
 
   items: Item[] = [];
@@ -27,6 +28,13 @@ export class GameService {
   constructor() {
 
     this.generateAvailableCells()
+    this.generateItem()
+  }
+
+  reset() {
+    this.scores = 0;
+    this.items = [];
+    this.theEnd = false;
     this.generateItem()
   }
 
@@ -98,6 +106,8 @@ export class GameService {
       }
 
     }
+
+    this.scores = +mergedItems.reduce((acc, item) => acc + item.value, 0)
 
     this.items = [...this.items, ...mergedItems];
 

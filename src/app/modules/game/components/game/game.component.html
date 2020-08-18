@@ -1,4 +1,7 @@
 <div class="game-container">
+  <h2>Scores: <strong>{{gameService.scores}}</strong>
+    <button (click)="gameService.reset()" id="reset_btn">Reset</button>
+  </h2>
   <div class="grid-container">
     <div class="grid-row">
       <div class="grid-cell"></div>
